@@ -131,7 +131,7 @@ $ unalias name
 
 alias 및 PS1 변경 내용은 로그인 동안에만 적용된다.
 로그인 이후에도 적용하기 위해서는 `.bashrc`(zsh, ...) 파일에 적용해주어야 한다.
-
+<br>
 ## 5. Redirection
 > 파일 입출력 방향 전환
 
@@ -145,17 +145,19 @@ keyboard -> (stdin) -> Program -> (stdout & stderr) -> Terminal
 |STDERR|`2>` / `2>>`|표준 에러 출력을 터미널이 아닌 파일로 출력|
 
 0과 1은 생략가능하다.
-
+<br>
 ## 6. Pipeline
 > 여러 개의 명령어 조합하여 사용
 > 명령의 실행 결과를 다음 명령의 입력으로 전달
 > 기호: command1 | command2 | command3
 
+### 예시 1
 ```
 ls -l | ws -l
 ls -l | more (한 페이지씩, space 누르면 다음 페이지)
 ```
 
+### 예시 2
 ```
 cat passwd | cut -d: -f 1 | sort | wc -l
 alias usercount='cat passwd | cut -d: -f 1 | sort | wc -l'
