@@ -92,10 +92,42 @@ $ touch myfile{1..4} (myfile1, myfile2, ..., myfile4 생성)
 ```
 $ echo "Today is $(date)"
 $ echo "Today is `date`"
+```
+
+```
 $ touch report-$(date +%Y%m%d)_v{1..4}
+// (date --help 참조)
+```
+
+```
+echo "Today is $(date +Y-%m-%d)"
+```
+
+## 3. Alias
+- shell의 명령에 새로운 이름을 부여
+- 명령들을 조합하여 새로운 이름의 명령을 생성
+
+```
+$ alias name='command'
+$ alias or alias name
+$ unalias name
 ```
 
 
-## 3. Alias
-
 ## 4. Prompt
+- PS1 변수를 이용해 shell의 기본 프롬프트 모양을 설정
+- Bash Shell에서만 Prompt 모양에 적용 가능한 특수 문자가 존재
+
+|특수문자|의미|
+|---|---|
+|\h|호스트 이름|
+|\u|사용자 이름|
+|\w|작업 디렉토리 - 절대경로|
+|\W|작업 디렉토리 - 상대경로|
+|\d|오늘 날짜|
+|\t|현재 시간|
+|\$|$ 또는 # 프롬프트 모양|
+
+
+alias 및 PS1 변경 내용은 로그인 동안에만 적용된다.
+따라서 `.bashrc`(zsh, ...) 파일에 적용해주어야 한다.
