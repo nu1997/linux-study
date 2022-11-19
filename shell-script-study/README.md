@@ -241,5 +241,21 @@ $ sample.sh
 ### 예제 2
 
 ```bash
+$ mkdir test
+$ cd test
+$ mkdir file{1..10}
+$ ls
+file 1 ~ 10
 
+# execute.sh
+#!bin/bash
+# ael
+ls > ./$(date +%Y%m%d).txt
+cat ./20221120.txt
+
+$ ./execute.sh
+=> ls 결과 출력
 ```
+
+<!-- # 8. Positional Parameters (위치 매개 변수) -->
+
