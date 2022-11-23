@@ -73,6 +73,8 @@
 | SHELL | 로그인 shell의 이름 |
 | <br>  |               |
 
+<br>
+
 # 3. Bash Shell과 Rules
 
 ## 1. Quoting Rule
@@ -172,7 +174,7 @@ date >> date.txt (append)
 ls file 2> err.txt
 ls file1 file100 2> /dev/null (소각장 같은 디렉토리)
 ```
-
+<br>
 
 ## 6. Pipeline
 
@@ -193,8 +195,9 @@ ls -l | more (한 페이지씩, space 누르면 다음 페이지)
 cat passwd | cut -d: -f 1 | sort | wc -l (콜론 구분, 필드 1번째 출력 후 정렬, 개수 출력)
 alias usercount='cat passwd | cut -d: -f 1 | sort | wc -l'
 ```
+<Br>
 
-## 7. Bash Shell Script
+# 4. Bash Shell Script
 
 - Script 와 Program의 차이?
 script: 하나의 파일에 명령어를 작성, 순차적으로 해석하여 실행
@@ -204,8 +207,8 @@ program: 소스코드를 컴파일하여 바이너리 명령어로 동작하도�
 - 리눅스 command를 모아 놓은 ASCII Text 파일
 - 실행 퍼미션을 할당해야 실행 가능
 - 특정 의미
-    - # : comment
-    - #!/bin/bash: 셔뱅, 해시뱅, 스크립트를 실행할 sub shell 이름
+    - `#` : comment
+    - `#!/bin/bash`: 셔뱅, 해시뱅, 스크립트를 실행할 sub shell 이름
 - 기본 top-down 방식
 - sub shell
 ```
@@ -257,5 +260,42 @@ $ ./execute.sh
 => ls 결과 출력
 ```
 
-<!-- # 8. Positional Parameters (위치 매개 변수) -->
+<br>
 
+# 5. Positional Parameters (위치 매개 변수)
+
+## 1. Positional Parameters
+> 위치 매개변수. 변수란? 데이터를 담는 그릇
+
+ex. `$ cp /etc/passwd ./pass`가 있을 때 `/etc/passwd`와 `./pass`는 매개변수로 주어진다. cp라는 바이너리 프로그램은 2개의 argument를 필요로 하기 때문. argument data는 변수에 저장되어 프로그램으로 전달
+이 때, `$0`, `$1`, `$2`, ... `${10}`(10부터 괄호)와 같은 형식으로 전달된다.
+모든 커맨드는 positional parameter로 저장되어 passing 된다.
+
+- number of arguments: `$#`
+- list of all parameters in `$@`, `$*`
+- special shell variables
+  - 로그인 shell의 PID: `$$`
+  - 현 작업 디렉토리: `$PWD`
+  - 부모 프로세스 ID: `$PPID` 
+
+## 2. 예제
+- `parameter-exam.sh`
+```
+echo "The script name: $0"
+echo "The first argument: $1"
+echo "The list of arguments: $@"
+```
+>>
+```
+$ ./parameter-exam.sh red blue black
+The script name: ./parameter-exam.sh
+The first argument: red
+The list of arguments: red blue black
+```
+
+- 첫번째 인자로 주어지는 경로의 모든 파일 리스트 저장 및 출력
+```
+#!/bin/bash/
+ls -l $1 > ./tmp/$(date +%Y%m%d).txt
+cat ./$(date +%Y%m%d).txt
+```
