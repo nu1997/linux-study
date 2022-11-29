@@ -108,13 +108,10 @@
   Hello, world!
   ```
     
-- 패키지 매니저 ex) apt
+- 패키지 매니저 ex) apt(Ubuntu), yum(CentOS)
     ```
-    
+    apt list --installed
+    apt install @@@
     ```
     
 - 텍스트 에디터 ex) nano
-    ```
-    
-    ```
-    
