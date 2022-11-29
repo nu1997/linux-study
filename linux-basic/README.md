@@ -115,3 +115,28 @@
     ```
     
 - 텍스트 에디터 ex) nano
+
+
+### 실습
+- 아이노드와 하드링크 
+  - 아이노드 번호 확인
+    ```
+    $ ls -ali
+    total 20
+    258281 drwxrwxr-x 2 ubuntu ubuntu 4096 Nov 29 05:27 . 
+    258157 drwxr-x--- 6 ubuntu ubuntu 4096 Nov 29 05:27 ..
+    258304 -rw-rw-r-- 1 ubuntu ubuntu 1845 Nov 28 04:51 123.txt
+    258306 -rw-rw-r-- 1 ubuntu ubuntu 1719 Nov 28 06:39 last.txt
+    258275 -rw-rw-r-- 1 ubuntu ubuntu 1812 Nov 29 04:30 lov.txt
+    ```
+  - 링크 생성
+    ```
+    $ ln 123.txt fx.txt
+    $ ln -s 123.txt s123.txt
+    ```
+  - 파일 상태 / 정보 조회
+    ```
+    $ stat fx.txt 
+    * modify: change on contents
+    * change: chagne on inode infos
+    ```
