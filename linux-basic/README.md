@@ -172,3 +172,31 @@ Is the information correct? [Y/n] y
 $ tail /etc/passwd
 ael:x:1001:1001:Test,123,88888888,97979797,24242424:/home/ael:/bin/bash
 ```
+
+### 사용자 삭제
+```
+$ sudo deluser ael --remove-home
+```
+
+### 그룹 + 사용자 등록 및 삭제
+```
+$ sudo addgroup animals
+$ sudo addgroup fruits
+
+$ sudo adduser pig --ingroup animals
+$ sudo adduser dog --ingroup animals
+...
+```
+
+### 권한 확인 및 수정
+```
+ubuntu$ su - pig
+pig$ touch pig
+pig$ ls -al
+-rw-r--r-- 1 pig  animals    0 Dec  1 17:29 pig
+
+chmod 644 pig
+chmod g+w pig
+...
+```
+홈 디렉토리 접근을 위해서는 기본적으로 사용자가 같은 그룹에 속해있어야 한다. (설정 변경 가능)
