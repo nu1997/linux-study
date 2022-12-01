@@ -140,3 +140,35 @@
     * modify: change on contents
     * change: chagne on inode infos
     ```
+
+### /etc/passwd
+- 시스템에 등록된 유저 정보 목록
+  ```
+  root:x:0:0:root:/root:/bin/bash
+  = id:pw:uid:gid:description:homedir:defaultshell
+  ```
+
+### 사용자 추가
+
+```
+$ sudo adduser ael
+Adding user `ael' ...
+Adding new group `ael' (1001) ...
+Adding new user `ael' (1001) with group `ael' ...
+Creating home directory `/home/ael' ...
+Copying files from `/etc/skel' ...
+New password: 
+Retype new password:
+passwd: password updated successfully
+Changing the user information for ael
+Enter the new value, or press ENTER for the default
+        Full Name []: Test
+        Room Number []: 123
+        Work Phone []: 88888888
+        Home Phone []: 97979797
+        Other []: 24242424
+Is the information correct? [Y/n] y
+
+$ tail /etc/passwd
+ael:x:1001:1001:Test,123,88888888,97979797,24242424:/home/ael:/bin/bash
+```
