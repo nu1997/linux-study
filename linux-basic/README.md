@@ -200,3 +200,110 @@ chmod g+w pig
 ...
 ```
 홈 디렉토리 접근을 위해서는 기본적으로 사용자가 같은 그룹에 속해있어야 한다. (설정 변경 가능)
+
+
+### 프로세스 목록 조회 및 구조 파악
+``` bash
+$ ps
+    PID TTY          TIME CMD
+   1409 pts/0    00:00:00 bash
+   1488 pts/0    00:00:00 ps
+
+$ ps -f
+UID          PID    PPID  C STIME TTY          TIME CMD
+ubuntu      1409    1408  0 04:16 pts/0    00:00:00 -bash
+ubuntu      1501    1409  0 04:47 pts/0    00:00:00 ps -f
+
+$ ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 04:14 ?        00:00:02 /sbin/init
+root           2       0  0 04:14 ?        00:00:00 [kthreadd]
+root           3       2  0 04:14 ?        00:00:00 [rcu_gp]
+root           4       2  0 04:14 ?        00:00:00 [rcu_par_gp]
+
+```
+- TIME: CPU의 TIME(점유 시간 합)
+- UID: user id
+- PPID: parent process id
+- C: CPU usage
+- [pname]: 커널이 관리하는 프로세스
+
+
+```
+#!/bin/bash
+
+while [ 1 ];do
+        echo "hello, pid $$"
+done
+```
+
+```
+ubuntu@ip-10-0-0-83:~$ echo $$
+1679
+ubuntu@ip-10-0-0-83:~$ vim process.sh
+ubuntu@ip-10-0-0-83:~$ ls
+process.sh
+ubuntu@ip-10-0-0-83:~$ chmod 755 process.sh
+ubuntu@ip-10-0-0-83:~$ ./process.sh
+hello, pid 1700
+hello, pid 1700
+hello, pid 1700
+hello, pid 1700
+hello, pid 1700
+hello, pid 1700
+hello, pid 1700
+^C
+ubuntu@ip-10-0-0-83:~$ echo $$
+1679
+```
+- 쉘과 스크립트는 다른 프로세스에서 실행됨을 알 수 있다.
+
+```
+echo $?
+``` 
+직전수행한 명령어의 exit state
+
+```
+$ echo $? >>> memo.txt
+-bash: syntax error near unexpected token `>'
+$ echo $? > memo.txt
+$ cat memo.txt
+2
+```
+
+###  Here Documents `<<`
+
+```
+$ wc << DELIM
+> hello
+> world
+> linux
+> DELIM
+      3       3      18
+```
+
+```
+$ cat > hellotext << EOF
+> hello
+> world
+> linux
+> EOF
+
+$ cat hellotext
+hello
+world
+linux
+```
+
+### Here Strings `<<<`
+
+```
+$ cat > hello <<< hi
+$ cat hello
+hi
+```
+
+### pipeline
+```
+$ ps -ef | grep "root" | grep "scsi"
+```
